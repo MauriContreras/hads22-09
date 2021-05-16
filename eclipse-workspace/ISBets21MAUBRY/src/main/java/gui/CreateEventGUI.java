@@ -1,31 +1,35 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.Frame;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.AdminUser;
 import domain.Event;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.beans.PropertyChangeEvent;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class CreateEventGUI extends JFrame {
 
@@ -63,7 +67,6 @@ public class CreateEventGUI extends JFrame {
 		JCalendar jCalendar1 = new JCalendar();
 		jCalendar1.getDayChooser().getDayPanel().setBackground(Color.WHITE);
 		jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("locale")) {
 					jCalendar1.setLocale((Locale) evt.getNewValue());
@@ -111,10 +114,8 @@ public class CreateEventGUI extends JFrame {
 		btnCrearEvento.setForeground(Color.WHITE);
 		btnCrearEvento.setFont(new Font("Dialog", Font.BOLD, 14));
 
-//		btnCrearEvento.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
-		btnCrearEvento.setText("CreateEvent");
+		btnCrearEvento.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateEvent"));
 		btnCrearEvento.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Date date = UtilDate.trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
 
@@ -157,11 +158,9 @@ public class CreateEventGUI extends JFrame {
 		btnAtras.setBackground(SystemColor.controlShadow);
 		btnAtras.setForeground(Color.WHITE);
 		btnAtras.setFont(new Font("Dialog", Font.BOLD, 14));
-//		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		btnAtras.setText("Close");
+		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 		btnAtras.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				Frame fr = new MainAdminGUI(userlog);

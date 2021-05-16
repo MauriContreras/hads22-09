@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -58,11 +59,8 @@ public class AnularApuestaGUI extends JFrame {
 		userlog = ru;
 		newUserActualizado = ru;
 
-//		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text")
-//				+ "                                                                                                      " + userlog.getUserName());
-		setTitle("btnAnularApuesta"
-				+ "                                                                                                      "
-				+ userlog.getUserName());
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text")
+				+ "                                                                                                      " + userlog.getUserName());
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1100, 500);
@@ -150,10 +148,8 @@ public class AnularApuestaGUI extends JFrame {
 												+ " será reintegrado inmediatamente...");
 
 								System.out.println("APUESTA ANULADA");
-//								lblSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo")
-//										+ " " + (newUserActualizado.getBalance() + apu.getAmount()) + "€");
-								lblSaldo.setText(
-										"Balance" + " " + (newUserActualizado.getBalance() + apu.getAmount()) + "€");
+								lblSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo")
+										+ " " + (newUserActualizado.getBalance() + apu.getAmount()) + "€");
 							}
 
 //							}
@@ -183,8 +179,7 @@ public class AnularApuestaGUI extends JFrame {
 		btnAtras.setForeground(Color.WHITE);
 		btnAtras.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnAtras.setBackground(SystemColor.controlShadow);
-//		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		btnAtras.setText("Close");
+		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 		btnAtras.addActionListener(new ActionListener() {
 			@Override
@@ -221,9 +216,7 @@ public class AnularApuestaGUI extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
-//		lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") //$NON-NLS-1$ //$NON-NLS-2$
-//				+ " " + userlog.getBalance() + "€");
-		lblSaldo = new JLabel("Balance" //$NON-NLS-1$ //$NON-NLS-2$
+		lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") //$NON-NLS-1$ //$NON-NLS-2$
 				+ " " + userlog.getBalance() + "€");
 		lblSaldo.setBounds(10, 8, 197, 19);
 		panel.add(lblSaldo);

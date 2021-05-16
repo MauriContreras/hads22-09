@@ -1,14 +1,12 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -17,12 +15,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
 import domain.RegularUser;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 public class ModificarDatosGUI extends JFrame {
 
@@ -57,8 +58,7 @@ public class ModificarDatosGUI extends JFrame {
 
 		userlog = ru;
 
-		// setTitle(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
-		setTitle("Show/EditProfile");
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
 
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,6 +77,10 @@ public class ModificarDatosGUI extends JFrame {
 		JLabel lblNewLabel = new JLabel(icon);
 		lblNewLabel.setBounds(21, 0, 37, 52);
 		contentPane.add(lblNewLabel);
+		
+		
+
+		
 
 		JLabel lblInfo = new JLabel("Aquí podrás ver el perfil de usuario y modificar los campos con borde azul."); //$NON-NLS-1$ //$NON-NLS-2$
 		lblInfo.setBounds(56, 20, 486, 16);
@@ -228,27 +232,21 @@ public class ModificarDatosGUI extends JFrame {
 		contentPane.add(fieldSaldo);
 		fieldSaldo.setText(Float.toString(userlog.getBalance()) + " €");
 
-		// buttonModificar = new
-		// JButton(ResourceBundle.getBundle("Etiquetas").getString("ModificarDatosGUI.modificar"));
-		buttonModificar = new JButton("modificar");
+		buttonModificar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ModificarDatosGUI.modificar"));
 		buttonModificar.setBounds(563, 463, 127, 29);
 		contentPane.add(buttonModificar);
 		buttonModificar.setBackground(SystemColor.textHighlight);
 		buttonModificar.setForeground(Color.WHITE);
 		buttonModificar.setFont(new Font("Dialog", Font.BOLD, 14));
 
-		// buttonCancelar = new
-		// JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		buttonCancelar = new JButton("Close");
+		buttonCancelar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 		buttonCancelar.setBounds(16, 463, 127, 29);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.setBackground(SystemColor.controlShadow);
 		buttonCancelar.setForeground(Color.WHITE);
 		buttonCancelar.setFont(new Font("Dialog", Font.BOLD, 14));
 
-		// buttonGuardar = new
-		// JButton(ResourceBundle.getBundle("Etiquetas").getString("ModificarDatosGUI.guardar"));
-		buttonGuardar = new JButton("guardar");
+		buttonGuardar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("ModificarDatosGUI.guardar"));
 		buttonGuardar.setBounds(563, 463, 127, 29);
 		contentPane.add(buttonGuardar);
 		buttonGuardar.setForeground(Color.WHITE);

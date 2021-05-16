@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,9 +37,8 @@ public class RecargarSaldoGUI extends JFrame {
 	private JTextField textCuentaB;
 	private JLabel labelNumTar = new JLabel("Número de tarjeta:");
 	private JLabel labelCadTar = new JLabel("Caducidad:");
-//	private JLabel labelVerifTar = new JLabel(
-//			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.labelVerifTar.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private JLabel labelVerifTar = new JLabel("Código de seguridad:"); //$NON-NLS-1$ //$NON-NLS-2$
+	private JLabel labelVerifTar = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.labelVerifTar.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	private JLabel labelCuentaB = new JLabel("Número de cuenta:");
 	private JRadioButton radioCuentaB = new JRadioButton("Cuenta bancaria");
 	private JRadioButton radioTarjeta = new JRadioButton("Tarjeta de crédito");
@@ -59,22 +59,18 @@ public class RecargarSaldoGUI extends JFrame {
 	private final JLabel lblSaldoPrevisto = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
 	private final JLabel lblUsername = new JLabel();
 	private final JLabel lblNombre = new JLabel(); // $NON-NLS-1$ //$NON-NLS-2$
-//	private final JLabel lblNewLabel = new JLabel(
-//			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private final JLabel lblNewLabel = new JLabel("Nombre de usuario:"); //$NON-NLS-1$ //$NON-NLS-2$
-//	private final JLabel lblNewLabel_1 = new JLabel(
-//			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private final JLabel lblNewLabel_1 = new JLabel("Nombre y Apellido"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel lblNewLabel = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel lblNewLabel_1 = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	private JLabel lblActualizarSaldo;
-//	private JButton btnCargarSaldo = new JButton(
-//			ResourceBundle.getBundle("Etiquetas").getString("MainGUI.cargarSaldo"));
-	private JButton btnCargarSaldo = new JButton("cargarSaldo");
+	private JButton btnCargarSaldo = new JButton(
+			ResourceBundle.getBundle("Etiquetas").getString("MainGUI.cargarSaldo"));
 	private JButton btnCancelar = new JButton("Cancelar");
 
 	private businessLogic.BLFacade facade = LoginGUI.getBusinessLogic();
-//	private final JLabel lblNewLabel_2 = new JLabel(
-//			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel_2.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private final JLabel lblNewLabel_2 = new JLabel("Recarga mínima de 1€"); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JLabel lblNewLabel_2 = new JLabel(
+			ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblNewLabel_2.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	private final JLabel lblErrorPrevio = new JLabel("Error: importe vacío");
 	private JTextField texto;
 	private Thread hilo;
@@ -109,6 +105,8 @@ public class RecargarSaldoGUI extends JFrame {
 		getContentPane().add(lblCuentaBancaria);
 
 		ImageIcon icon = new ImageIcon("imagenes/info.png");
+		
+
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(85, 155, 457, 13);
@@ -196,6 +194,9 @@ public class RecargarSaldoGUI extends JFrame {
 		panel.setLayout(null);
 
 		ImageIcon icon5 = new ImageIcon("imagenes/tarjetas_credito2.png");
+		
+		
+		
 
 		textVerifTar = new JTextField();
 		textVerifTar.setBounds(174, 281, 72, 39);
@@ -255,17 +256,27 @@ public class RecargarSaldoGUI extends JFrame {
 		panel.add(lblPagarCon);
 		lblInfoCad.setBounds(376, 230, 87, 16);
 		panel.add(lblInfoCad);
-//		lblInfoCad.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblInfoCad.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblInfoCad.setText("MM (M)  AA"); //$NON-NLS-1$ //$NON-NLS-2$
+		lblInfoCad.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblInfoCad.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblInfoCad.setVisible(false);
 		lblInfoCad.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		lblInfoCad.setForeground(Color.GRAY);
-
+		
+		
 		ImageIcon icon2 = new ImageIcon("imagenes/info.png");
 		lblIcono2 = new JLabel(icon2);
 		lblIcono2.setBounds(348, 215, 27, 44);
 		lblIcono2.setVisible(false);
 		panel.add(lblIcono2);
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
 
 		ImageIcon icon3 = new ImageIcon("imagenes/info.png");
 		lblIcono3 = new JLabel(icon3);
@@ -273,8 +284,15 @@ public class RecargarSaldoGUI extends JFrame {
 		panel.add(lblIcono3);
 		lblIcono3.setVisible(false);
 
-//		lblInfoCodSeg.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblInfoCodSeg.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblInfoCodSeg.setText("XXX"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		
+		
+		
+		
+		
+		
+		
+		lblInfoCodSeg.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblInfoCodSeg.text")); //$NON-NLS-1$ //$NON-NLS-2$
 
 		lblInfoCodSeg.setBounds(298, 293, 55, 16);
 		lblInfoCodSeg.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -459,8 +477,7 @@ public class RecargarSaldoGUI extends JFrame {
 			}
 		});
 
-//		JButton btnAtras = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		JButton btnAtras = new JButton("Close");
+		JButton btnAtras = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 		btnAtras.setBounds(47, 722, 99, 26);
 		getContentPane().add(btnAtras);
 		btnAtras.setBackground(SystemColor.controlShadow);
@@ -481,21 +498,19 @@ public class RecargarSaldoGUI extends JFrame {
 		lblSaldoActual.setForeground(Color.WHITE);
 		lblSaldoActual.setFont(new Font("Dialog", Font.BOLD, 75));
 		lblSaldoActual.setText(userlog.getBalance().toString() + "  €");
-		lblSaldoActualizado.setBounds(14, 161, 498, 155);
+		lblSaldoActualizado.setBounds(33, 163, 498, 155);
 		panel_2.add(lblSaldoActualizado);
 		lblSaldoActualizado.setForeground(Color.WHITE);
 		lblSaldoActualizado.setFont(new Font("Dialog", Font.BOLD, 75));
-//		lblSaldoActualInfo
-//				.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblSaldoActualInfo.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblSaldoActualInfo.setText("Saldo actual:"); //$NON-NLS-1$ //$NON-NLS-2$
+		lblSaldoActualInfo
+				.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblSaldoActualInfo.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblSaldoActualInfo.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblSaldoActualInfo.setForeground(Color.WHITE);
 		lblSaldoActualInfo.setBounds(33, 12, 174, 33);
 
 		panel_2.add(lblSaldoActualInfo);
-//		lblSaldoPrevisto
-//				.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblSaldoPrevisto.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblSaldoPrevisto.setText("Saldo previsto:"); //$NON-NLS-1$ //$NON-NLS-2$
+		lblSaldoPrevisto
+				.setText(ResourceBundle.getBundle("Etiquetas").getString("RecargarSaldoGUI.lblSaldoPrevisto.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblSaldoPrevisto.setForeground(Color.WHITE);
 		lblSaldoPrevisto.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblSaldoPrevisto.setBounds(33, 163, 174, 33);

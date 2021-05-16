@@ -1717,18 +1717,6 @@ public class DataAccess {
 
 	}
 
-	public static void main(String[] args) {
 
-		DataAccess data = new DataAccess();
-		RegularUser usuario = new RegularUser("usuario", "Usuario1?", "Nombre", "Apellido", "01/01/2000",
-				"usuario@gmail.com", "ES11 1111 1111 1111", 123456789, "", 0);
-		Event ev1 = new Event(69, "Eibar-Eibar", UtilDate.newDate(2025, 4, 17));
-		Question pregunta = new Question("pregunta", 2, ev1);
-		Forecast pronostico = new Forecast("Madrid", 17, pregunta);
-		Bet apuesta = new Bet(pronostico, usuario, 13);
-
-		System.out.println(data.anularApuesta(apuesta));
-
-	}
 
 }

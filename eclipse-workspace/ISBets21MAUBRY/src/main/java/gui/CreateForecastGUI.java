@@ -1,54 +1,33 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Vector;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import businessLogic.BLFacade;
+import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
 
-import businessLogic.BLFacade;
-import configuration.UtilDate;
 import domain.AdminUser;
+import domain.Event;
+import domain.Forecast;
 import domain.Question;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.List;
+import java.awt.event.*;
+import java.beans.*;
+import java.text.DateFormat;
+import java.util.*;
+
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class CreateForecastGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-//	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-//	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
-//	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-	private final JLabel jLabelEventDate = new JLabel("EventDate");
-	private final JLabel jLabelQueries = new JLabel("Queries");
-	private final JLabel jLabelEvents = new JLabel("Events");
+	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
+	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
-//	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-	private JButton jButtonClose = new JButton("Close");
+	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -65,19 +44,12 @@ public class CreateForecastGUI extends JFrame {
 	private DefaultTableModel tableModelEvents;
 	private DefaultTableModel tableModelQueries;
 
-//	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Event"),
-//
-//	};
-//	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Query")
-//
-//	};
-
-	private String[] columnNamesEvents = new String[] { "EventN", "Event",
+	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Event"),
 
 	};
-	private String[] columnNamesQueries = new String[] { "QueryN", "Query"
+	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
 	private JTextField textForecast;
@@ -90,7 +62,7 @@ public class CreateForecastGUI extends JFrame {
 	private JButton btnCreateForecast = new JButton();
 	private final JLabel lblNewLabel_1 = new JLabel(""); //$NON-NLS-1$ //$NON-NLS-2$
 	private final JLabel lblNewLabel_2 = new JLabel("Cuota mínima 1"); //$NON-NLS-1$ //$NON-NLS-2$
-
+	
 	public static void setBusinessLogic(BLFacade pfacade) {
 		facade = pfacade;
 	}
@@ -114,8 +86,7 @@ public class CreateForecastGUI extends JFrame {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(700, 550));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonCreateForecast.text"));
-		this.setTitle("CreateForecast");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonCreateForecast.text"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(138, 211, 406, 14);
@@ -131,7 +102,6 @@ public class CreateForecastGUI extends JFrame {
 		jButtonClose.setBounds(new Rectangle(40, 449, 130, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				jButton2_actionPerformed(e);
 			}
@@ -147,7 +117,6 @@ public class CreateForecastGUI extends JFrame {
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
 
 				if (propertychangeevent.getPropertyName().equals("locale")) {
@@ -189,13 +158,11 @@ public class CreateForecastGUI extends JFrame {
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty())
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("NoEvents" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						else
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("Events" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						for (domain.Event ev : events) {
 							if (!ev.getClosed()) {
 								Vector<Object> row = new Vector<Object>();
@@ -241,13 +208,11 @@ public class CreateForecastGUI extends JFrame {
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
-//					jLabelQueries.setText(
-//							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
-					jLabelQueries.setText("NoQueries" + ": " + ev.getDescription());
+					jLabelQueries.setText(
+							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
 				else
-//					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-//							+ ev.getDescription());
-					jLabelQueries.setText("SelectedEvent" + " " + ev.getDescription());
+					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
+							+ ev.getDescription());
 
 				for (domain.Question q : queries) {
 					Vector<Object> row = new Vector<Object>();
@@ -288,7 +253,8 @@ public class CreateForecastGUI extends JFrame {
 				return false;
 			}
 		};
-
+		
+		
 		tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -301,7 +267,8 @@ public class CreateForecastGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
 		tableQueries.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -309,11 +276,13 @@ public class CreateForecastGUI extends JFrame {
 				final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
 						column);
 
-				c.setBackground(row % 2 != 0 ? new Color(233, 233, 233) : Color.WHITE);
+				c.setBackground(row % 2 !=0 ? new Color(233, 233, 233) : Color.WHITE);
 
 				return c;
 			}
 		});
+		
+		
 
 		tableQueries.setModel(tableModelQueries);
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
@@ -338,43 +307,43 @@ public class CreateForecastGUI extends JFrame {
 		btnCreateForecast.setBackground(SystemColor.textHighlight);
 
 		btnCreateForecast.setEnabled(false);
-//		btnCreateForecast
-//				.setText(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonCreateForecast.text"));
-		btnCreateForecast.setText("CreateForecast");
-
+		btnCreateForecast.setText(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonCreateForecast.text"));
+		
 		btnCreateForecast.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(que.toString());
 				if (textFee.getText().equals("")) {
-
+					
 					JOptionPane.showMessageDialog(getContentPane(), "La cuota no puede estar vacía", "Error",
 							JOptionPane.ERROR_MESSAGE);
 
-				} else {
+				}
+				else {
 					float fee = Float.parseFloat(textFee.getText());
 
-					String f = textForecast.getText();
+				
+				String f = textForecast.getText();
 
-					if (f.equals("")) {
-						JOptionPane.showMessageDialog(getContentPane(), "El pronóstico no puede estar vacío", "Error",
-								JOptionPane.ERROR_MESSAGE);
-					} else if (fee < 1f) {
-						JOptionPane.showMessageDialog(getContentPane(), "La cuota no puede ser inferior a 1", "Error",
-								JOptionPane.ERROR_MESSAGE);
+				if (f.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "El pronóstico no puede estar vacío", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else if (fee <1f){
+					JOptionPane.showMessageDialog(getContentPane(), "La cuota no puede ser inferior a 1", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					boolean inserted = facade.insertForecast(que, f, fee);
+					if (inserted) {
+						JOptionPane.showMessageDialog(getContentPane(), "Pronóstico añadido correctamente");
+						textForecast.setText("");
+						textFee.setText("");
 					} else {
-						boolean inserted = facade.insertForecast(que, f, fee);
-						if (inserted) {
-							JOptionPane.showMessageDialog(getContentPane(), "Pronóstico añadido correctamente");
-							textForecast.setText("");
-							textFee.setText("");
-						} else {
-							JOptionPane.showMessageDialog(getContentPane(), "Pronóstico ya existente");
-							textForecast.setText("");
-							textFee.setText("");
+						JOptionPane.showMessageDialog(getContentPane(), "Pronóstico ya existente");
+						textForecast.setText("");
+						textFee.setText("");
 
-						}
 					}
+				}
 				}
 			}
 		});
@@ -394,12 +363,12 @@ public class CreateForecastGUI extends JFrame {
 		getContentPane().add(textFee);
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Bryan\\Desktop\\Workspace\\ISBets21BRYMAUJONUNA\\info.png"));
 		lblNewLabel_1.setBounds(560, 322, 30, 30);
-
+		
 		getContentPane().add(lblNewLabel_1);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
 		lblNewLabel_2.setForeground(Color.GRAY);
 		lblNewLabel_2.setBounds(586, 331, 90, 13);
-
+		
 		getContentPane().add(lblNewLabel_2);
 
 	}

@@ -1,12 +1,8 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,6 +13,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -39,21 +36,19 @@ import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class CloseEventGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-//	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-//	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
-//	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-//
-//	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
+	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
+	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
-	private final JLabel jLabelEventDate = new JLabel("EventDate");
-	private final JLabel jLabelQueries = new JLabel("Queries");
-	private final JLabel jLabelEvents = new JLabel("Events");
-
-	private JButton jButtonClose = new JButton("Close");
+	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -71,27 +66,17 @@ public class CloseEventGUI extends JFrame {
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecasts;
 
-//	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Event"),
-//
-//	};
-//	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Query")
-//
-//	};
-//
-//	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
-//
-//	};
-	private String[] columnNamesEvents = new String[] { "EventN", "Event",
+	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Event"),
 
 	};
-	private String[] columnNamesQueries = new String[] { "QueryN", "Query"
+	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
 
-	private String[] columnNamesForecasts = new String[] { "ForecastN", "Forecast", "Fee"
+	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
 
 	};
 	private Question ques;
@@ -132,11 +117,13 @@ public class CloseEventGUI extends JFrame {
 	}
 
 	private void jbInit() throws Exception {
+		
+		
+		
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(800, 560));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.buttonCloseEvent.text"));
-		this.setTitle("buttonCloseEvent");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.buttonCloseEvent.text"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(10, 211, 406, 14);
@@ -158,6 +145,7 @@ public class CloseEventGUI extends JFrame {
 			}
 		});
 
+		
 		tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -170,7 +158,8 @@ public class CloseEventGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
 		tableQueries.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -183,7 +172,8 @@ public class CloseEventGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
 		this.getContentPane().add(jButtonClose, null);
 		jCalendar1.getDayChooser().getDayPanel().setBackground(Color.WHITE);
 
@@ -201,6 +191,7 @@ public class CloseEventGUI extends JFrame {
 		btnCloseQuestion.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnCloseQuestion.setBackground(SystemColor.textHighlight);
 
+		
 		btnCloseQuestion.setEnabled(false);
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
@@ -209,7 +200,7 @@ public class CloseEventGUI extends JFrame {
 
 				btnCloseQuestion.setEnabled(false);
 				lblNoForecasts.setVisible(false);
-
+				
 				if (propertychangeevent.getPropertyName().equals("locale")) {
 					jCalendar1.setLocale((Locale) propertychangeevent.getNewValue());
 				} else if (propertychangeevent.getPropertyName().equals("calendar")) {
@@ -249,13 +240,11 @@ public class CloseEventGUI extends JFrame {
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty())
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("NoEvents" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						else
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("Events" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						for (domain.Event ev : events) {
 							if (!ev.getClosed()) {
 								Vector<Object> row = new Vector<Object>();
@@ -275,7 +264,7 @@ public class CloseEventGUI extends JFrame {
 																												// shown
 						tableModelQueries.setRowCount(0);
 						comboBox.removeAllItems();
-						// JTable
+																												// JTable
 					} catch (Exception e1) {
 
 						jLabelQueries.setText(e1.getMessage());
@@ -294,10 +283,10 @@ public class CloseEventGUI extends JFrame {
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				
 				btnCloseQuestion.setEnabled(false);
 				lblNoForecasts.setVisible(false);
-
+				
 				int i = tableEvents.getSelectedRow();
 				domain.Event ev = (domain.Event) tableModelEvents.getValueAt(i, 2); // obtain ev object
 				queries = facade.getOpenedQuestions(ev);
@@ -305,13 +294,11 @@ public class CloseEventGUI extends JFrame {
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
-//					jLabelQueries.setText(
-//							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
-					jLabelQueries.setText("NoQueries" + ": " + ev.getDescription());
+					jLabelQueries.setText(
+							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
 				else
-//					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-//							+ ev.getDescription());
-					jLabelQueries.setText("SelectedEvent" + " " + ev.getDescription());
+					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
+							+ ev.getDescription());
 
 				for (domain.Question q : queries) {
 					if (q.getResult() == null) {
@@ -330,6 +317,7 @@ public class CloseEventGUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lblNoForecasts.setVisible(false);
+
 
 				tableQueries.removeAll();
 				btnCloseQuestion.setEnabled(true);
@@ -352,17 +340,18 @@ public class CloseEventGUI extends JFrame {
 
 				comboBox.removeAllItems();
 				forecasts = ques.getForecasts();
-
+				
 				if (forecasts.isEmpty()) {
 					lblNoForecasts.setVisible(true);
 					btnCloseQuestion.setEnabled(false);
-				} else {
-
-					for (domain.Forecast f : forecasts) {
-						forecastsitos.addElement(f.getForecast());
-						// System.out.println(f.getQuestion().getQuestion());
-					}
-					comboBox.setModel(forecastsitos);
+				}
+				else {
+				
+				for (domain.Forecast f : forecasts) {
+					forecastsitos.addElement(f.getForecast());
+					// System.out.println(f.getQuestion().getQuestion());
+				}
+				comboBox.setModel(forecastsitos);
 
 //						tableForecasts.addMouseListener(new MouseAdapter() {
 //							@Override
@@ -425,9 +414,8 @@ public class CloseEventGUI extends JFrame {
 //		btnCloseBet.setBounds(508, 406, 130, 30);
 //		getContentPane().add(btnCloseBet);
 
-//		JLabel lblNewLabel = new JLabel(
-//				ResourceBundle.getBundle("Etiquetas").getString("CloseBetGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		JLabel lblNewLabel = new JLabel("CloseBetGUI"); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel lblNewLabel = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("CloseBetGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblNewLabel.setBounds(410, 252, 144, 14);
 		getContentPane().add(lblNewLabel);
 		comboBox.setBackground(Color.WHITE);
@@ -438,7 +426,8 @@ public class CloseEventGUI extends JFrame {
 		btnCloseQuestion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+				
+				
 				System.out.println(".....cerrrando pregunta.....");
 				int i = comboBox.getSelectedIndex();
 				int j = tableQueries.getSelectedRow();
@@ -450,22 +439,23 @@ public class CloseEventGUI extends JFrame {
 				JOptionPane.showMessageDialog(getContentPane(), "La pregunta <<" + queries.get(j).getQuestion() + ">>"
 						+ " se ha cerrado con éxito con la respuesta <<" + winnerF.getForecast() + ">>");
 //				queries.remove(j);
-				comboBox.removeAllItems();
-				tableModelQueries.removeRow(j);
-				queries.remove(j);
+					comboBox.removeAllItems();
+					tableModelQueries.removeRow(j);
+					queries.remove(j);
 
 				System.out.println("El evento esta cerrado: " + ques.getEvent().getClosed());
-
+				
 				boolean estadoEvento = facade.getEstadoEvento(ques.getEvent());
-				if (estadoEvento) {
+				if(estadoEvento) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"El evento <<" + ques.getEvent().getDescription() + ">> se ha cerrado con éxito");
 					System.out.println("El evento esta cerrado: " + estadoEvento);
 
 					btnCloseQuestion.setEnabled(false);
+					
 
 				}
-
+				
 //				if (ques.getEvent().getClosed()) {
 //					JOptionPane.showMessageDialog(getContentPane(),
 //							"El evento <<" + ques.getEvent().getDescription() + ">> se ha cerrado con éxito");
@@ -476,28 +466,31 @@ public class CloseEventGUI extends JFrame {
 		});
 		btnCloseQuestion.setBounds(364, 428, 166, 32);
 		getContentPane().add(btnCloseQuestion);
+		
+		
 
 	}
 
 	private void jButton2_actionPerformed(ActionEvent e) {
-
+		
 //		if (controlPreguntas) {
 //			JOptionPane.showMessageDialog(getContentPane(),
 //					"Te avisamos de que el evento no ha sido cerrado completamente");
 //		}
-
+		
 		Vector<Event> eventosMedioCerrados = facade.getEventosMedioCerrados();
-
-		if (eventosMedioCerrados.isEmpty() == false) {
-			for (Event ee : eventosMedioCerrados) {
+		
+		if(eventosMedioCerrados.isEmpty()==false) {
+			for (Event ee: eventosMedioCerrados) {
 				JOptionPane.showMessageDialog(getContentPane(),
-						"Te avisamos de que el evento " + ee.getDescription() + " no ha sido cerrado completamente");
+						"Te avisamos de que el evento " + ee.getDescription()+ " no ha sido cerrado completamente");
 			}
-
+			
 		}
-
+		
 		eventosMedioCerrados.clear();
-
+		
+		
 		Frame gui = new MainAdminGUI((AdminUser) userlog);
 		gui.setAlwaysOnTop(true);
 		gui.setVisible(true);

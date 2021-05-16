@@ -1,31 +1,16 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Vector;
+import java.util.*;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.toedter.calendar.JCalendar;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
@@ -40,14 +25,10 @@ public class CreateQuestionGUI extends JFrame {
 	private JComboBox<Event> jComboBoxEvents = new JComboBox<Event>();
 	DefaultComboBoxModel<Event> modelEvents = new DefaultComboBoxModel<Event>();
 
-//	private JLabel jLabelListOfEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ListEvents"));
-//	private JLabel jLabelQuery = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Query"));
-//	private JLabel jLabelMinBet = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MinimumBetPrice"));
-//	private JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-	private JLabel jLabelListOfEvents = new JLabel("ListEvents");
-	private JLabel jLabelQuery = new JLabel("Query");
-	private JLabel jLabelMinBet = new JLabel("MinimumBet");
-	private JLabel jLabelEventDate = new JLabel("EventDate");
+	private JLabel jLabelListOfEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("ListEvents"));
+	private JLabel jLabelQuery = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Query"));
+	private JLabel jLabelMinBet = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MinimumBetPrice"));
+	private JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 
 	private JTextField jTextFieldQuery = new JTextField();
 	private JTextField jTextFieldPrice = new JTextField();
@@ -57,10 +38,8 @@ public class CreateQuestionGUI extends JFrame {
 
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 
-//	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateQuestion"));
-//	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-	private JButton jButtonCreate = new JButton("CreateQuestion");
-	private JButton jButtonClose = new JButton("Close");
+	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateQuestion"));
+	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private JLabel jLabelMsg = new JLabel();
 	private JLabel jLabelError = new JLabel();
 
@@ -84,8 +63,7 @@ public class CreateQuestionGUI extends JFrame {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(604, 440));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuestion"));
-		this.setTitle("CreateQuestion");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuestion"));
 
 		jComboBoxEvents.setModel(modelEvents);
 		jComboBoxEvents.setBounds(new Rectangle(275, 47, 250, 20));
@@ -95,7 +73,7 @@ public class CreateQuestionGUI extends JFrame {
 		jTextFieldQuery.setForeground(Color.GRAY);
 		jTextFieldQuery.setFont(new Font("Arial", Font.PLAIN, 16));
 		jLabelMinBet.setBounds(new Rectangle(25, 283, 75, 20));
-		jTextFieldPrice.setBounds(new Rectangle(110, 282, 60, 20));
+		jTextFieldPrice.setBounds(new Rectangle(95, 283, 60, 20));
 		jTextFieldPrice.setForeground(Color.GRAY);
 		jTextFieldPrice.setFont(new Font("Arial", Font.PLAIN, 15));
 		jCalendar.getDayChooser().getDayPanel().setBackground(Color.WHITE);
@@ -110,7 +88,6 @@ public class CreateQuestionGUI extends JFrame {
 		jButtonCreate.setEnabled(false);
 
 		jButtonCreate.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				jButtonCreate_actionPerformed(e);
 			}
@@ -120,7 +97,6 @@ public class CreateQuestionGUI extends JFrame {
 		jButtonClose.setBackground(SystemColor.controlShadow);
 		jButtonClose.setBounds(new Rectangle(25, 342, 130, 30));
 		jButtonClose.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				jButtonClose_actionPerformed(e);
 			}
@@ -158,7 +134,6 @@ public class CreateQuestionGUI extends JFrame {
 
 		// Code for JCalendar
 		this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
 //				this.jCalendar.addPropertyChangeListener(new PropertyChangeListener() {
 //					public void propertyChange(PropertyChangeEvent propertychangeevent) {
@@ -201,13 +176,11 @@ public class CreateQuestionGUI extends JFrame {
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty())
-//							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")
-//									+ ": " + dateformat1.format(calendarAct.getTime()));
-							jLabelListOfEvents.setText("NoEvents" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")
+									+ ": " + dateformat1.format(calendarAct.getTime()));
 						else
-//							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelListOfEvents.setText("Events" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelListOfEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						jComboBoxEvents.removeAllItems();
 						System.out.println("Events " + events);
 
@@ -264,7 +237,7 @@ public class CreateQuestionGUI extends JFrame {
 			// That number of components is calculated with "offset" and is different in
 			// English and Spanish
 //			    		  Component o=(Component) jCalendar.getDayChooser().getDayPanel().getComponent(i+offset);; 
-			Component o = jCalendar.getDayChooser().getDayPanel()
+			Component o = (Component) jCalendar.getDayChooser().getDayPanel()
 					.getComponent(calendar.get(Calendar.DAY_OF_MONTH) + offset);
 			o.setBackground(Color.CYAN);
 		}
@@ -291,8 +264,7 @@ public class CreateQuestionGUI extends JFrame {
 				float inputPrice = Float.parseFloat(jTextFieldPrice.getText());
 
 				if (inputPrice <= 0)
-//					jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
-					jLabelError.setText("ErrorNumber");
+					jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
 				else {
 
 					// Obtain the business logic from a StartWindow class (local or remote)
@@ -300,22 +272,17 @@ public class CreateQuestionGUI extends JFrame {
 
 					facade.createQuestion(event, inputQuery, inputPrice);
 
-//					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
-					jLabelMsg.setText("QueryCreated");
+					jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryCreated"));
 				}
 			} else
-//				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQuery"));
-				jLabelMsg.setText("ErrorQuery");
+				jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQuery"));
 		} catch (EventFinished e1) {
-//			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished") + ": "
-//					+ event.getDescription());
-			jLabelMsg.setText("ErrorEventHasFinished" + ": " + event.getDescription());
+			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished") + ": "
+					+ event.getDescription());
 		} catch (QuestionAlreadyExist e1) {
-//			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
-			jLabelMsg.setText("ErrorQueryAlreadyExist");
+			jLabelMsg.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
 		} catch (java.lang.NumberFormatException e1) {
-//			jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
-			jLabelError.setText("ErrorNumber");
+			jLabelError.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
 		} catch (Exception e1) {
 
 			e1.printStackTrace();

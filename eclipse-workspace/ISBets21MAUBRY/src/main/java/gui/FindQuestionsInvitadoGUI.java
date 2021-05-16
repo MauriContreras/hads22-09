@@ -1,53 +1,32 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import businessLogic.BLFacade;
+import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
 
-import businessLogic.BLFacade;
-import configuration.UtilDate;
 import domain.AdminUser;
 import domain.Forecast;
 import domain.Question;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.List;
+import java.awt.event.*;
+import java.beans.*;
+import java.text.DateFormat;
+import java.util.*;
+
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class FindQuestionsInvitadoGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-//	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-//	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
-//	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-//
-//	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-	private final JLabel jLabelEventDate = new JLabel("EventDate");
-	private final JLabel jLabelQueries = new JLabel("Queries");
-	private final JLabel jLabelEvents = new JLabel("Events");
+	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
+	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
-	private JButton jButtonClose = new JButton("Close");
+	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -69,27 +48,17 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 
 	private BLFacade facade = LoginGUI.getBusinessLogic();
 
-//	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Event"),
-//
-//	};
-//	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Query")
-//
-//	};
-//
-//	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
-//
-//	};
-	private String[] columnNamesEvents = new String[] { "EventN", "Event",
+	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Event"),
 
 	};
-	private String[] columnNamesQueries = new String[] { "QueryN", "Query"
+	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
 
-	private String[] columnNamesForecasts = new String[] { "ForecastN", "Forecast", "Fee"
+	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
 
 	};
 
@@ -103,6 +72,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 	public FindQuestionsInvitadoGUI() {
 		getContentPane().setBackground(Color.WHITE);
 
+
 		try {
 			jbInit();
 		} catch (Exception e) {
@@ -114,8 +84,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(820, 520));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonQueryQuestions.text"));
-		this.setTitle("QueryQuestions");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.jButtonQueryQuestions.text"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(40, 248, 406, 14);
@@ -131,7 +100,6 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 		jButtonClose.setBounds(new Rectangle(332, 419, 130, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				jButton2_actionPerformed(e);
 			}
@@ -147,7 +115,6 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
 
 				if (propertychangeevent.getPropertyName().equals("locale")) {
@@ -185,13 +152,11 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty())
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("NoEvents" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						else
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("Events" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						for (domain.Event ev : events) {
 							if (!ev.getClosed()) {
 								Vector<Object> row = new Vector<Object>();
@@ -209,9 +174,9 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not
 																												// shown
-						tableModelQueries.setRowCount(0);
-						tableModelForecasts.setRowCount(0);// in
-															// JTable
+									tableModelQueries.setRowCount(0);
+									tableModelForecasts.setRowCount(0);// in
+																												// JTable
 					} catch (Exception e1) {
 
 						jLabelQueries.setText(e1.getMessage());
@@ -238,13 +203,10 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
-//					jLabelQueries.setText(
-//							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
-					jLabelQueries.setText("NoQueries" + ": " + ev.getDescription());
+					jLabelQueries.setText(
+							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
 				else
-//					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-//							+ ev.getDescription());
-					jLabelQueries.setText("SelectedEvent" + " "
+					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
 							+ ev.getDescription());
 
 				for (domain.Question q : queries) {
@@ -259,6 +221,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 			}
 		});
 
+		
 		tableQueries.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -271,7 +234,9 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
+		
 		tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -284,7 +249,8 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
 		tableForecasts.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -297,7 +263,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
 		tableQueries.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -352,7 +318,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 		tableQueries.setModel(tableModelQueries);
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-
+		
 		scrollPaneForecasts.setViewportView(tableForecasts);
 		tableModelForecasts = new DefaultTableModel(null, columnNamesForecasts) {
 			@Override
@@ -369,6 +335,7 @@ public class FindQuestionsInvitadoGUI extends JFrame {
 		this.getContentPane().add(scrollPaneEvents, null);
 		this.getContentPane().add(scrollPaneQueries, null);
 		this.getContentPane().add(scrollPaneForecasts);
+
 
 	}
 

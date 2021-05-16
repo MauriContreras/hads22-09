@@ -1,56 +1,37 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import businessLogic.BLFacade;
+import configuration.UtilDate;
 
 import com.toedter.calendar.JCalendar;
 
-import businessLogic.BLFacade;
-import configuration.UtilDate;
+import domain.AdminUser;
+import domain.Bet;
+import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.RegularUser;
+import domain.User;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.List;
+import java.awt.event.*;
+import java.beans.*;
+import java.text.DateFormat;
+import java.util.*;
+
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class CreateBetGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-//	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-//	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
-//	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
-	private final JLabel jLabelEventDate = new JLabel("EventDate");
-	private final JLabel jLabelQueries = new JLabel("Queries");
-	private final JLabel jLabelEvents = new JLabel("Events");
+	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
+	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries"));
+	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events"));
 
-//	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-	private JButton jButtonClose = new JButton("Close");
+	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -70,27 +51,17 @@ public class CreateBetGUI extends JFrame {
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecasts;
 
-//	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Event"),
-//
-//	};
-//	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Query")
-//
-//	};
-//
-//	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
-//			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
-//
-//	};
-	private String[] columnNamesEvents = new String[] { "EventN", "Event",
+	private String[] columnNamesEvents = new String[] { ResourceBundle.getBundle("Etiquetas").getString("EventN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Event"),
 
 	};
-	private String[] columnNamesQueries = new String[] { "QueryN", "Query"
+	private String[] columnNamesQueries = new String[] { ResourceBundle.getBundle("Etiquetas").getString("QueryN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
 
-	private String[] columnNamesForecasts = new String[] { "ForecastN", "Forecast", "Fee"
+	private String[] columnNamesForecasts = new String[] { ResourceBundle.getBundle("Etiquetas").getString("ForecastN"),
+			ResourceBundle.getBundle("Etiquetas").getString("Forecast"), "Fee"
 
 	};
 	private Question que;
@@ -104,9 +75,8 @@ public class CreateBetGUI extends JFrame {
 	private Vector<Question> queries;
 	private JLabel lblSaldo;
 
-	// private JButton btnCreateBet = new
-	// JButton(ResourceBundle.getBundle("Etiquetas").getString("MakeBet"));
-	private JButton btnCreateBet = new JButton("Bet");
+	private JButton btnCreateBet = new JButton(
+			ResourceBundle.getBundle("Etiquetas").getString("MakeBet"));
 
 	public static void setBusinessLogic(BLFacade pfacade) {
 		facade = pfacade;
@@ -133,9 +103,8 @@ public class CreateBetGUI extends JFrame {
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(730, 550));
 
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MakeBet")
-//				+ "                                                " + userlog.getUserName());
-		this.setTitle("MakeBet" + "                                                " + userlog.getUserName());
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MakeBet")
+				+ "                                                " + userlog.getUserName());
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(10, 211, 406, 14);
 		jLabelEvents.setBounds(295, 19, 259, 16);
@@ -150,7 +119,6 @@ public class CreateBetGUI extends JFrame {
 		jButtonClose.setBounds(new Rectangle(57, 419, 130, 30));
 
 		jButtonClose.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				Frame gui = new MainGUI(newUserActualizado);
 				gui.setAlwaysOnTop(true);
@@ -169,9 +137,9 @@ public class CreateBetGUI extends JFrame {
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
 			public void propertyChange(PropertyChangeEvent propertychangeevent) {
 				btnCreateBet.setEnabled(false);
+
 
 				if (propertychangeevent.getPropertyName().equals("locale")) {
 					jCalendar1.setLocale((Locale) propertychangeevent.getNewValue());
@@ -212,13 +180,11 @@ public class CreateBetGUI extends JFrame {
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty())
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("NoEvents" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						else
-//							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
-//									+ dateformat1.format(calendarAct.getTime()));
-							jLabelEvents.setText("Events" + ": " + dateformat1.format(calendarAct.getTime()));
+							jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events") + ": "
+									+ dateformat1.format(calendarAct.getTime()));
 						for (domain.Event ev : events) {
 							if (!ev.getClosed()) {
 								Vector<Object> row = new Vector<Object>();
@@ -234,11 +200,11 @@ public class CreateBetGUI extends JFrame {
 						}
 						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2));
-
-						tableModelQueries.setRowCount(0);
-						tableModelForecasts.setRowCount(0);
-
+						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); 
+																												
+							tableModelQueries.setRowCount(0);
+							tableModelForecasts.setRowCount(0);
+																												
 					} catch (Exception e1) {
 
 						jLabelQueries.setText(e1.getMessage());
@@ -269,13 +235,11 @@ public class CreateBetGUI extends JFrame {
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
-//					jLabelQueries.setText(
-//							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
-					jLabelQueries.setText("NoQueries" + ": " + ev.getDescription());
+					jLabelQueries.setText(
+							ResourceBundle.getBundle("Etiquetas").getString("NoQueries") + ": " + ev.getDescription());
 				else
-//					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
-//							+ ev.getDescription());
-					jLabelQueries.setText("SelectedEvent" + " " + ev.getDescription());
+					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent") + " "
+							+ ev.getDescription());
 
 				for (domain.Question q : queries) {
 					Vector<Object> row = new Vector<Object>();
@@ -319,7 +283,16 @@ public class CreateBetGUI extends JFrame {
 				textBet.setText(String.valueOf(que.getBetMinimum()));
 			}
 		});
-
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
 		tableForecasts.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -332,7 +305,9 @@ public class CreateBetGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
+		
 		tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -345,7 +320,9 @@ public class CreateBetGUI extends JFrame {
 				return c;
 			}
 		});
-
+		
+		
+		
 		tableQueries.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -358,6 +335,10 @@ public class CreateBetGUI extends JFrame {
 				return c;
 			}
 		});
+		
+		
+		
+		
 
 		scrollPaneEvents.setViewportView(tableEvents);
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents) {
@@ -406,7 +387,6 @@ public class CreateBetGUI extends JFrame {
 		btnCreateBet.setEnabled(false);
 		btnCreateBet.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(que.toString());
 				float betP = Float.parseFloat(textBet.getText());
@@ -422,9 +402,8 @@ public class CreateBetGUI extends JFrame {
 						JOptionPane.showMessageDialog(getContentPane(), "Apuesta realizada correctamente" + "\n"
 								+ "Has apostado a " + forecast.getForecast() + " con " + betP + "€");
 						System.out.println("APUESTA CORRECTAMENTE REALIZADA");
-//						lblSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblSaldo_2.text")
-//								+ " " + (newUserActualizado.getBalance() - betP) + "€");
-						lblSaldo.setText("lblSaldo_2" + " " + (newUserActualizado.getBalance() - betP) + "€");
+						lblSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblSaldo_2.text")
+								+ " " + (newUserActualizado.getBalance() - betP) + "€");
 						textBet.setText(String.valueOf(que.getBetMinimum()));
 					} else if (inserted == 4) {
 						JOptionPane.showMessageDialog(getContentPane(), "No puedes apostar valores negativos");
@@ -446,9 +425,8 @@ public class CreateBetGUI extends JFrame {
 		btnCreateBet.setBounds(439, 419, 130, 30);
 		getContentPane().add(btnCreateBet);
 
-//		JLabel lblNewLabel = new JLabel(
-//				ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		JLabel lblNewLabel = new JLabel("Bet"); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel lblNewLabel = new JLabel(
+				ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblNewLabel.setBounds(268, 380, 26, 14);
 		getContentPane().add(lblNewLabel);
 
@@ -456,31 +434,27 @@ public class CreateBetGUI extends JFrame {
 		textBet.setHorizontalAlignment(SwingConstants.LEFT);
 		textBet.setForeground(Color.GRAY);
 		textBet.setFont(new Font("Arial", Font.PLAIN, 15));
-//		textBet.setToolTipText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.textFee.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
-//		textBet.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.textFee.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		textBet.setToolTipText("Bet Amount");
+		textBet.setToolTipText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.textFee.toolTipText")); //$NON-NLS-1$ //$NON-NLS-2$
+		textBet.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.textFee.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		textBet.setBounds(new Rectangle(100, 211, 429, 20));
 		textBet.setBounds(293, 377, 89, 20);
 		getContentPane().add(textBet);
 
 		JLabel lblNewLabel_1 = new JLabel(
-//				ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblNewLabel_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
-//		lblNewLabel_1.setBounds(385, 380, 26, 14);
-				"€"); //$NON-NLS-1$ //$NON-NLS-2$
+				ResourceBundle.getBundle("Etiquetas").getString("CreateBetGUI.lblNewLabel_1.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblNewLabel_1.setBounds(385, 380, 26, 14);
 		getContentPane().add(lblNewLabel_1);
-
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 128));
 		panel.setBounds(549, 15, 140, 25);
 		getContentPane().add(panel);
-
-//		lblSaldo = new JLabel(
-//				ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " " + userlog.getBalance() + "€");
-		lblSaldo = new JLabel("Balance" + " " + userlog.getBalance() + "€");
-		panel.add(lblSaldo);
-		lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblSaldo.setForeground(Color.WHITE);
+		
+				lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " "
+						+ userlog.getBalance() + "€");
+				panel.add(lblSaldo);
+				lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblSaldo.setForeground(Color.WHITE);
 
 	}
 }

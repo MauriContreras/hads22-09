@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author Software Engineering teachers
@@ -50,7 +51,8 @@ public class MainGUI extends JFrame {
 	private JButton btnHistorial;
 	private JButton btnAnularApuesta;
 
-	private JButton btnCargarSaldo = new JButton("Load Balance");
+	private JButton btnCargarSaldo = new JButton(
+			ResourceBundle.getBundle("Etiquetas").getString("MainGUI.cargarSaldo"));
 
 	private JLabel lblFotoPerfil = new JLabel("");
 
@@ -96,10 +98,8 @@ public class MainGUI extends JFrame {
 
 		this.setSize(820, 650);
 		this.setContentPane(getJContentPane());
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle")
-//				+ "                                                            " + userlog.getUserName());
-		this.setTitle(
-				"MainTitle" + "                                                            " + userlog.getUserName());
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle")
+				+ "                                                            " + userlog.getUserName());
 	}
 
 	/**
@@ -157,9 +157,7 @@ public class MainGUI extends JFrame {
 
 				}
 			});
-			// btnHistorial.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text"));
-			// //$NON-NLS-1$ //$NON-NLS-2$
-			btnHistorial.setText("Check History");
+			btnHistorial.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text")); //$NON-NLS-1$ //$NON-NLS-2$
 			btnHistorial.setBounds(45, 269, 422, 83);
 			jContentPane.add(btnHistorial);
 			jContentPane.add(getBtnAnularApuesta());
@@ -237,8 +235,7 @@ public class MainGUI extends JFrame {
 	 */
 	private JButton getBoton2() {
 
-		// btnModificar.setText(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
-		btnModificar.setText("Show/EditProfile");
+		btnModificar.setText(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -277,8 +274,7 @@ public class MainGUI extends JFrame {
 
 	private JLabel getLblNewLabel() {
 		if (jLabelSelectOption == null) {
-//			jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
-			jLabelSelectOption = new JLabel("SelectOption");
+			jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
 			jLabelSelectOption.setBounds(0, 12, 536, 97);
 			jLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 			jLabelSelectOption.setForeground(Color.BLACK);
@@ -351,24 +347,15 @@ public class MainGUI extends JFrame {
 	}
 
 	private void redibujar() {
-//		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
-//		btnBet.setText(ResourceBundle.getBundle("Etiquetas").getString("MakeBet"));
-//		btnModificar.setText(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
-//		btnHistorial.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text"));
-//		lblSaldo.setText(
-//				ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " " + userlog.getBalance() + "€");
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
-//		btnAnularApuesta.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text"));
-//		btnCargarSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.cargarSaldo"));
-
-		jLabelSelectOption.setText("SelectOption");
-		btnBet.setText("Bet");
-		btnModificar.setText("Show/EditProfile");
-		btnHistorial.setText("CheckHistory");
-		lblSaldo.setText("Balance" + " " + userlog.getBalance() + "€");
-		this.setTitle("MainTitle");
-		btnAnularApuesta.setText("Cancel Bet");
-		btnCargarSaldo.setText("Load Balance");
+		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
+		btnBet.setText(ResourceBundle.getBundle("Etiquetas").getString("MakeBet"));
+		btnModificar.setText(ResourceBundle.getBundle("Etiquetas").getString("Show/EditProfile"));
+		btnHistorial.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text"));
+		lblSaldo.setText(
+				ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " " + userlog.getBalance() + "€");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
+		btnAnularApuesta.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text"));
+		btnCargarSaldo.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.cargarSaldo"));
 
 	}
 
@@ -401,18 +388,15 @@ public class MainGUI extends JFrame {
 					dispose();
 				}
 			});
-			// btnBet.setText(ResourceBundle.getBundle("Etiquetas").getString("MakeBet"));
-			// //$NON-NLS-1$ //$NON-NLS-2$
-			btnBet.setText("MakeBet");
+			btnBet.setText(ResourceBundle.getBundle("Etiquetas").getString("MakeBet")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return btnBet;
 	}
 
 	private JLabel getlblSaldo() {
 		if (lblSaldo == null) {
-//			lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " "
-//					+ userlog.getBalance() + "€");
-			lblSaldo = new JLabel("Balance" + " " + userlog.getBalance() + "€");
+			lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") + " "
+					+ userlog.getBalance() + "€");
 			lblSaldo.setBounds(8, 5, 205, 19);
 			lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
 			lblSaldo.setForeground(Color.WHITE);
@@ -446,8 +430,7 @@ public class MainGUI extends JFrame {
 
 				}
 			});
-//			btnAnularApuesta.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			btnAnularApuesta.setText("Cancel Bet");
+			btnAnularApuesta.setText(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnAnularApuesta.text")); //$NON-NLS-1$ //$NON-NLS-2$
 			btnAnularApuesta.setBounds(45, 352, 422, 83);
 		}
 		return btnAnularApuesta;

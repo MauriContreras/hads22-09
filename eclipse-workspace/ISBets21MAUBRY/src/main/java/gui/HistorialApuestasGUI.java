@@ -1,31 +1,41 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.TableView.TableRow;
 
 import businessLogic.BLFacade;
 import domain.Bet;
 import domain.RegularUser;
+
+import javax.swing.JScrollBar;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
+import java.awt.SystemColor;
 
 public class HistorialApuestasGUI extends JFrame {
 
@@ -73,12 +83,10 @@ public class HistorialApuestasGUI extends JFrame {
 
 		userlog = ru;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text")
-//				+ "                                                                                                                                          " +  userlog.getUserName());
-		setTitle("btnHistorial"
-				+ "                                                                                                                                          "
-				+ userlog.getUserName());
-
+		setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnHistorial.text")
+				+ "                                                                                                                                          " +  userlog.getUserName());
+				
+		
 		getContentPane().setLayout(null);
 		this.setSize(1388, 641);
 
@@ -213,14 +221,14 @@ public class HistorialApuestasGUI extends JFrame {
 
 		/* BOTON ATRAS, BOTONES DESCARGAR TABLA Y LABELS */
 
-//		JButton btnAtras = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		JButton btnAtras = new JButton("Close");
+		JButton btnAtras = new JButton(
+				ResourceBundle.getBundle("Etiquetas").getString("Close"));
 		btnAtras.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnAtras.setForeground(Color.WHITE);
 		btnAtras.setBackground(SystemColor.controlShadow);
 
+		
 		btnAtras.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				JFrame a = new MainGUI(userlog);
@@ -246,7 +254,6 @@ public class HistorialApuestasGUI extends JFrame {
 		btnDescargarTabla.setForeground(Color.WHITE);
 		btnDescargarTabla.setBackground(SystemColor.textHighlight);
 		btnDescargarTabla.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				try {
@@ -266,7 +273,6 @@ public class HistorialApuestasGUI extends JFrame {
 		btnDescargarTabla2.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnDescargarTabla2.setBackground(SystemColor.textHighlight);
 		btnDescargarTabla2.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					System.out.println("IMPRIMIDA LA TABLA 2");
@@ -293,18 +299,20 @@ public class HistorialApuestasGUI extends JFrame {
 		JLabel lblNewLabel = new JLabel(icon);
 		lblNewLabel.setBounds(68, 37, 30, 30);
 		getContentPane().add(lblNewLabel);
-
+		
+		
+		
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 128));
 		panel.setBounds(895, 37, 141, 30);
 		getContentPane().add(panel);
-
-//		JLabel lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") //$NON-NLS-1$ //$NON-NLS-2$
-		JLabel lblSaldo = new JLabel("Balance" //$NON-NLS-1$ //$NON-NLS-2$
-				+ " " + userlog.getBalance() + "€");
-		panel.add(lblSaldo);
-		lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblSaldo.setForeground(Color.WHITE);
+		
+				JLabel lblSaldo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblSaldo") //$NON-NLS-1$ //$NON-NLS-2$
+						+ " " + userlog.getBalance() + "€");
+				panel.add(lblSaldo);
+				lblSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblSaldo.setForeground(Color.WHITE);
 
 	}
 }

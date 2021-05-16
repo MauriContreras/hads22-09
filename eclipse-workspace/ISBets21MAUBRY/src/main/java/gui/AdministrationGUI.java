@@ -2,33 +2,48 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
+import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import businessLogic.BLFacade;
 import domain.AdminUser;
 import domain.Bet;
 import domain.Event;
+import domain.Forecast;
 import domain.Question;
 import domain.RegularUser;
 import domain.User;
+
+import javax.swing.JTextArea;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.JTextPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
+import java.awt.Font;
 
 public class AdministrationGUI extends JFrame {
 
@@ -109,8 +124,7 @@ public class AdministrationGUI extends JFrame {
 
 		userlog = u;
 
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.buttonAdmin.text"));
-		this.setTitle("buttonAdmin");
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.buttonAdmin.text"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1600, 650);
 		getContentPane().setLayout(null);
@@ -220,11 +234,9 @@ public class AdministrationGUI extends JFrame {
 		btnAtras.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnAtras.setForeground(Color.WHITE);
 		btnAtras.setBackground(SystemColor.controlShadow);
-//		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
-		btnAtras.setText("Close");
+		btnAtras.setText(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 		btnAtras.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				JFrame a = new MainAdminGUI(userlog);
@@ -354,11 +366,12 @@ public class AdministrationGUI extends JFrame {
 		lblInfo2.setBounds(58, 63, 746, 16);
 		getContentPane().add(lblInfo2);
 
+		
 		ImageIcon icon = new ImageIcon("imagenes/info.png");
 		lblIcono = new JLabel(icon);
 		lblIcono.setBounds(27, 27, 30, 30);
 		getContentPane().add(lblIcono);
-
+		
 		separator = new JSeparator();
 		separator.setBounds(58, 91, 672, 16);
 		getContentPane().add(separator);
