@@ -1,0 +1,6 @@
+C:\Users\Bryan\source\repos\componenteEnvioEmail\bin\Release\componenteEnvioEmail.dll
+C:\Users\Bryan\source\repos\componenteEnvioEmail\bin\Release\componenteEnvioEmail.pdb
+C:\Users\Bryan\source\repos\componenteEnvioEmail\obj\Release\componenteEnvioEmail.csproj.AssemblyReference.cache
+C:\Users\Bryan\source\repos\componenteEnvioEmail\obj\Release\componenteEnvioEmail.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\source\repos\componenteEnvioEmail\obj\Release\componenteEnvioEmail.dll
+C:\Users\Bryan\source\repos\componenteEnvioEmail\obj\Release\componenteEnvioEmail.pdb
